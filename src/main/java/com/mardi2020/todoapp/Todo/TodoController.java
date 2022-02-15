@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -15,9 +16,6 @@ public class TodoController {
 
     /**
      * html form 띄우기
-     * @param model
-     * @param todo
-     * @return
      */
     @GetMapping("/todo/new")
     public String showTodoInsertForm() {
@@ -36,6 +34,11 @@ public class TodoController {
     @GetMapping
     public String getTodoAll(Model model) {
         List<TodoDTO> todos = todoService.getTodoAll();
+        // YYYY-MM-DD hh:mm:ss
+        SimpleDateFormat ParseDate = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        for (TodoDTO todo : todos) {
+            todo.setStringDate(ParseDate.format(todo.getWritten_date()));
+        }
         model.addAttribute("todos", todos);
 
         return "index";

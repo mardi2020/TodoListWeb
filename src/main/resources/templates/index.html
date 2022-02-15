@@ -1,17 +1,22 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div class="container">
+<div>
+<button type="button" onclick="location.href='/todo/new'">추가하기</button>
+</div>
+    <div class="container">
     <div>
         <table>
             <thead>
             <tr>
+                <th>date</th>
                 <th>title</th>
-                <th>Todo</th>
+                <th>memo</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="todo : ${todos}">
+                <td th:text="${todo.stringDate}"></td>
                 <td th:text="${todo.title}"></td>
                 <td th:text="${todo.memo}"></td>
             </tr>

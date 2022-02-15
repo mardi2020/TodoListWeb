@@ -10,7 +10,7 @@
     </insert>
 
     <select id="getTodoAll" resultType="TodoDTO">
-        SELECT * FROM Todo;
+        SELECT * FROM todo;
     </select>
 
 </mapper>
