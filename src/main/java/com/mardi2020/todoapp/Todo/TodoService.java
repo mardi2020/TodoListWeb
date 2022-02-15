@@ -11,8 +11,8 @@ public class TodoService {
 
     private final TodoMapper todoMapper;
 
-    public List<WriteTodoDTO> insertTodo() {
-        return todoMapper.insertTodo();
+    public void insertTodo(WriteTodoDTO todo) {
+        todoMapper.insertTodo(todo);
     }
 
     public List<TodoDTO> getTodoAll() {
