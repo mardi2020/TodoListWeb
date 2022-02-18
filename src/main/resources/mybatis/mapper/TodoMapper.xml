@@ -20,4 +20,14 @@
     <update id="updateTodo" parameterType="EditTodoDTO">
         UPDATE todo SET title=#{title}, memo=#{memo} WHERE id=#{id}
     </update>
+
+    <!-- 날짜 별로 가져오기 -->
+    <select id="getTodoByDate" resultType="DateDTO">
+        SELECT distinct DATE(written_date) as written_date FROM todo
+    </select>
+
+    <!-- 특정 날짜 -->
+    <select id="getTodoAllByDate" resultType="TodoDTO">
+        SELECT * FROM todo WHERE written_date LIKE CONCAT(#{date}, '%')
+    </select>
 </mapper>

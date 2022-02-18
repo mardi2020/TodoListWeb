@@ -1,34 +1,25 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <a th:href="@{/todo/{date}(date=${today})}">
+        <button type="button">오늘 날짜로 바로가기</button>
+    </a>
+</head>
 <body>
-<div>
-<button type="button" onclick="location.href='/todo/new'">추가하기</button>
-</div>
     <div class="container">
     <div>
         <table>
             <thead>
             <tr>
                 <th>date</th>
-                <th>title</th>
-                <th>memo</th>
-                <th>삭제 하기</th>
-                <th>수정 하기</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="todo : ${todos}">
-                <td th:text="${todo.stringDate}"></td>
-                <td th:text="${todo.title}"></td>
-                <td th:text="${todo.memo}"></td>
+            <tr th:each="day:${dates}">
+                <!-- 날짜마다 구분된 페이지로 들어가기 -->
                 <td>
-                    <form th:action="@{'/todo/delete/{id}'(id=${todo.id})}" th:method="delete">
-                        <button type="submit"> 삭제 </button>
-                    </form>
-                </td>
-                <td>
-                    <a th:href="@{/todo/edit/{id}(id=${todo.id})}">
-                      <button type="button">수정</button>
+                    <a th:href="@{/todo/{date}(date=${day.written_date})}" th:text="${day.written_date}">
+                        <button type="button"></button>
                     </a>
                 </td>
             </tr>

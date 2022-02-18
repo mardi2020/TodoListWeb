@@ -26,4 +26,12 @@ public class TodoService {
     public void updateTodo(EditTodoDTO todo) {
         todoMapper.updateTodo(todo);
     }
+
+    public List<DateDTO> getTodoByDate(){
+        return todoMapper.getTodoByDate();
+    }
+
+    public List<TodoDTO> getTodoAllByDate(String date) {
+        return todoMapper.getTodoAllByDate(date);
+    }
 }

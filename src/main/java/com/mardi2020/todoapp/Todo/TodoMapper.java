@@ -19,4 +19,8 @@ public interface TodoMapper {
     void deleteTodo(long id);
 
     void updateTodo(EditTodoDTO todo);
+
+    List<DateDTO> getTodoByDate();
+
+    List<TodoDTO> getTodoAllByDate(String date);
 }
