@@ -37,7 +37,8 @@ public class TodoController {
         // YYYY-MM-DD hh:mm:ss
         SimpleDateFormat ParseDate = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         for (TodoDTO todo : todos) {
-            todo.setStringDate(ParseDate.format(todo.getWritten_date()));
+            // 시간은 필요없으므로 날짜만 슬라이싱
+            todo.setStringDate(ParseDate.format(todo.getWritten_date()).substring(0, 10));
         }
         model.addAttribute("todos", todos);
 
@@ -47,7 +48,18 @@ public class TodoController {
     @PostMapping("/todo/delete/{id}")
     public String deleteTodoById(@PathVariable long id) {
         todoService.deleteTodo(id);
-        System.out.println("deleteId = " + id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/todo/edit/{id}")
+    public String EditTodoPage(Model model, @PathVariable long id) {
+        model.addAttribute("id", id);
+        return "todo/todoEdit";
+    }
+
+    @PostMapping("/todo/edit/{id}")
+    public String EditTodoById(EditTodoDTO todo) {
+        todoService.updateTodo(todo);
         return "redirect:/";
     }
 }

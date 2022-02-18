@@ -17,4 +17,6 @@ public interface TodoMapper {
     List<TodoDTO> getTodoAll();
 
     void deleteTodo(long id);
+
+    void updateTodo(EditTodoDTO todo);
 }

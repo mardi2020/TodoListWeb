@@ -17,4 +17,7 @@
         DELETE FROM todo WHERE id=#{id}
     </delete>
 
+    <update id="updateTodo" parameterType="EditTodoDTO">
+        UPDATE todo SET title=#{title}, memo=#{memo} WHERE id=#{id}
+    </update>
 </mapper>
