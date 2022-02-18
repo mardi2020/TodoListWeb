@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class TodoDTO {
+    private long id;
 
     private Date written_date; // 날짜 + time
 

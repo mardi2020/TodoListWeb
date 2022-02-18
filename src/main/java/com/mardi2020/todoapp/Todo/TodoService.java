@@ -18,4 +18,8 @@ public class TodoService {
     public List<TodoDTO> getTodoAll() {
         return todoMapper.getTodoAll();
     }
+
+    public void deleteTodo(long id) {
+        todoMapper.deleteTodo(id);
+    }
 }

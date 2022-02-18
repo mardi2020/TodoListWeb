@@ -13,4 +13,8 @@
         SELECT * FROM todo;
     </select>
 
+    <delete id="deleteTodo" parameterType="long">
+        DELETE FROM todo WHERE id=#{id}
+    </delete>
+
 </mapper>

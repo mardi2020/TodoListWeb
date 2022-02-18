@@ -12,6 +12,7 @@
                 <th>date</th>
                 <th>title</th>
                 <th>memo</th>
+                <th>삭제 하기</th>
             </tr>
             </thead>
             <tbody>
@@ -19,6 +20,11 @@
                 <td th:text="${todo.stringDate}"></td>
                 <td th:text="${todo.title}"></td>
                 <td th:text="${todo.memo}"></td>
+                <td>
+                    <form th:action="@{'/todo/delete/{id}'(id=${todo.id})}" th:method="delete">
+                        <button type="submit"> 삭제 하기 </button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -43,4 +43,11 @@ public class TodoController {
 
         return "index";
     }
+
+    @PostMapping("/todo/delete/{id}")
+    public String deleteTodoById(@PathVariable long id) {
+        todoService.deleteTodo(id);
+        System.out.println("deleteId = " + id);
+        return "redirect:/";
+    }
 }
