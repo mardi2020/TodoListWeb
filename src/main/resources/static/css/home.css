@@ -1,0 +1,19 @@
+a {
+    text-decoration: none;
+}
+
+#goToday {
+    background-color: #282C34;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#dateList {
+
+}
+
+#showDate {
+    font-size: 15px;
+}

@@ -23,7 +23,7 @@
 
     <!-- 날짜 별로 가져오기 -->
     <select id="getTodoByDate" resultType="DateDTO">
-        SELECT distinct DATE(written_date) as written_date FROM todo
+        SELECT distinct DATE(written_date) as written_date FROM todo ORDER BY DATE(written_date) ASC
     </select>
 
     <!-- 특정 날짜 -->

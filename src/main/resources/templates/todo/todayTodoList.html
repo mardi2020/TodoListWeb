@@ -12,16 +12,14 @@
     <table>
       <thead>
       <tr>
-        <th>date</th>
         <th>title</th>
         <th>memo</th>
-        <th>삭제 하기</th>
-        <th>수정 하기</th>
+        <th>삭제</th>
+        <th>수정</th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="todo : ${todos}">
-        <td th:text="${todo.stringDate}"></td>
         <td th:text="${todo.title}"></td>
         <td th:text="${todo.memo}"></td>
         <td>
