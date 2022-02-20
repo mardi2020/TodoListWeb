@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mardi2020.todoapp.Todo.UserMapper">
+
+    <insert id="UserJoin" parameterType="UserJoinDTO">
+        INSERT INTO User(loginId, password, nickname) VALUES(#{loginId}, #{password}, #{nickname});
+    </insert>
+
+    <select id="findUserByLoginId" resultType="User">
+        SELECT * FROM User WHERE loginId = #{loginId}
+    </select>
+
+</mapper>

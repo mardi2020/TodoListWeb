@@ -43,4 +43,8 @@ public class TodoService {
 //        return todoMapper.getTodoAllByDate(date);
         return sqlSession.selectList("getTodoAllByDate", date);
     }
+
+    public long loadUserPK(String loginId) {
+        return sqlSession.selectOne("findUserPKByLoginId", loginId);
+    }
 }

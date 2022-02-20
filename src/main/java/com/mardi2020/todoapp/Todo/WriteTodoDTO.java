@@ -16,4 +16,5 @@ public class WriteTodoDTO {
 
     private boolean star; // 중요한 내용이면 true, 아니면 일반 메모
 
+    private long userId; // 외래키
 }

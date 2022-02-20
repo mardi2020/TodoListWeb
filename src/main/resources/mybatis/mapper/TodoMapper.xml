@@ -6,7 +6,7 @@
 <mapper namespace="com.mardi2020.todoapp.Todo.TodoMapper">
 
     <insert id="insertTodo" parameterType="WriteTodoDTO">
-        INSERT INTO Todo(title, memo, star) VALUES(#{title}, #{memo}, #{star});
+        INSERT INTO Todo(title, memo, star, userId) VALUES(#{title}, #{memo}, #{star}, #{userId});
     </insert>
 
     <select id="getTodoAll" resultType="TodoDTO">
@@ -29,5 +29,9 @@
     <!-- 특정 날짜 -->
     <select id="getTodoAllByDate" resultType="TodoDTO">
         SELECT * FROM todo WHERE written_date LIKE CONCAT(#{date}, '%')
+    </select>
+
+    <select id="findUserPKByLoginId" resultType="long">
+        SELECT id FROM User WHERE loginId=#{loginId}
     </select>
 </mapper>

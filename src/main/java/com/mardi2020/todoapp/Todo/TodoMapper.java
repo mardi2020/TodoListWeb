@@ -22,5 +22,7 @@ public interface TodoMapper {
 
     List<DateDTO> getTodoByDate();
 
-    List<TodoDTO> getTodoAllByDate(String date);
+    List<TodoDTO> getTodoAllByDate(String loginId);
+
+    long findUserPKByLoginId(String loginId);
 }
