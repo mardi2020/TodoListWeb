@@ -13,4 +13,7 @@
         SELECT * FROM User WHERE loginId = #{loginId}
     </select>
 
+    <select id="findPassword" resultType="String">
+        SELECT password FROM User WHERE loginId=#{loginId}
+    </select>
 </mapper>

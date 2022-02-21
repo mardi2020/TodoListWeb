@@ -48,4 +48,7 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getLoginId(), user.getPassword(), authorities);
     }
 
+    public String findPassword(String loginId) {
+        return sqlSession.selectOne("findPassword", loginId);
+    }
 }

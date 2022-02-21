@@ -13,4 +13,5 @@ public interface UserMapper {
 
     User findUserByLoginId(String loginId);
 
+    String findPassword(String loginId);
 }

@@ -18,4 +18,6 @@ public class TodoDTO {
 
     private String stringDate;
 
+    private long userId;
+
 }

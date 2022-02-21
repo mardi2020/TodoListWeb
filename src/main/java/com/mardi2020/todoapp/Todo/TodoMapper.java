@@ -20,9 +20,9 @@ public interface TodoMapper {
 
     void updateTodo(EditTodoDTO todo);
 
-    List<DateDTO> getTodoByDate();
+    List<DateDTO> getTodoByDate(long userId);
 
-    List<TodoDTO> getTodoAllByDate(String loginId);
+    List<TodoDTO> getTodoAllByDate(String date, long userId);
 
     long findUserPKByLoginId(String loginId);
 }

@@ -10,7 +10,7 @@
     </insert>
 
     <select id="getTodoAll" resultType="TodoDTO">
-        SELECT * FROM todo;
+        SELECT * FROM todo WHERE userId=#{userId};
     </select>
 
     <delete id="deleteTodo" parameterType="long">
@@ -23,12 +23,12 @@
 
     <!-- 날짜 별로 가져오기 -->
     <select id="getTodoByDate" resultType="DateDTO">
-        SELECT distinct DATE(written_date) as written_date FROM todo ORDER BY DATE(written_date) ASC
+        SELECT distinct DATE(written_date) as written_date FROM todo WHERE userId=#{userId} ORDER BY DATE(written_date) ASC
     </select>
 
     <!-- 특정 날짜 -->
     <select id="getTodoAllByDate" resultType="TodoDTO">
-        SELECT * FROM todo WHERE written_date LIKE CONCAT(#{date}, '%')
+        SELECT * FROM todo WHERE written_date LIKE CONCAT(#{date}, '%') and userId=#{userId}
     </select>
 
     <select id="findUserPKByLoginId" resultType="long">
