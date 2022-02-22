@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,14 +16,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/")
-    public String index(Principal principal) {
-        System.out.println("principal = " + principal);
+    public String index() {
         return "index";
     }
 
     @GetMapping("/user/signup")
     public String showInsertUserForm(Model model){
         model.addAttribute("user", new UserJoinDTO());
+
         return "user/register";
     }
 

@@ -43,8 +43,6 @@ dependencies {
 
     // 비밀번호 찾기를 위한 이메일 인증작업
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-
-    implementation 'org.springframework.boot:spring-boot-devtools' //devtools
 }
 
 tasks.named('test') {
