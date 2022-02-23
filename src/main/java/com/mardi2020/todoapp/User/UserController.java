@@ -1,13 +1,14 @@
 package com.mardi2020.todoapp.User;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mardi2020.todoapp.weather.WeatherDTO;
+import com.mardi2020.todoapp.weather.WeatherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,15 +16,19 @@ public class UserController {
 
     private final UserService userService;
 
+    private final WeatherService weatherService;
+
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        WeatherDTO weather = weatherService.filteringInfo();
+        model.addAttribute("weather", weather);
+        System.out.println("model = " + model);
         return "index";
     }
 
     @GetMapping("/user/signup")
     public String showInsertUserForm(Model model){
         model.addAttribute("user", new UserJoinDTO());
-
         return "user/register";
     }
 
