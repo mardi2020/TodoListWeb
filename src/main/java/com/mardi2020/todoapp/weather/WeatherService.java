@@ -3,14 +3,15 @@ package com.mardi2020.todoapp.weather;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mardi2020.todoapp.geoLocation.GeoLocationService;
+import com.mardi2020.todoapp.geoLocation.GeoResults;
 import com.mardi2020.todoapp.weather.json.Weather;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -22,13 +23,12 @@ public class WeatherService {
     @Value("${weatherKey}")
     private String key;
 
-    private String lat = "37.517";
+    @Autowired
+    private GeoLocationService geoLocationService;
 
-    private String lon = "127.04";
-
-    private String getWeather(){
+    private String getWeather(String lat, String lon){
         StringBuilder stringBuilder = new StringBuilder();
-        System.out.println("key = " + key);
+
         try {
             String APIUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + key;
 
@@ -66,10 +66,13 @@ public class WeatherService {
     public WeatherDTO filteringInfo() {
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        String results = getWeather();
-
         WeatherDTO weather = new WeatherDTO();
         try {
+            GeoResults geoResults = geoLocationService.fiteringInfo("");
+            String lat = geoResults.getGeoLoaction().getLat();
+            String lon = geoResults.getGeoLoaction().getLon();
+            String results = getWeather(lat, lon);
+
             weather = mapper.readValue(results, WeatherDTO.class);
 
             // 켈빈을 섭씨로 변환
@@ -88,15 +91,14 @@ public class WeatherService {
                 w.setIcon(iconUrl.toString());
             }
 
-            System.out.println("weather = " + weather);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return weather;
     }
 
     private String toCelcius(String temp) {
-        Double tmp = Double.parseDouble(temp);
+        double tmp = Double.parseDouble(temp);
         return Integer.toString((int) (tmp - 273.15));
     }
 }

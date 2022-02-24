@@ -1,6 +1,7 @@
 package com.mardi2020.todoapp.User;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mardi2020.todoapp.geoLocation.GeoLocationService;
+import com.mardi2020.todoapp.geoLocation.GeoResults;
 import com.mardi2020.todoapp.weather.WeatherDTO;
 import com.mardi2020.todoapp.weather.WeatherService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 @Controller
@@ -22,7 +24,6 @@ public class UserController {
     public String index(Model model) {
         WeatherDTO weather = weatherService.filteringInfo();
         model.addAttribute("weather", weather);
-        System.out.println("model = " + model);
         return "index";
     }
 

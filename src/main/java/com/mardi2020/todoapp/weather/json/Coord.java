@@ -1,14 +1,15 @@
 package com.mardi2020.todoapp.weather.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.ToString;
+import lombok.Data;
 
-@ToString
+
+@Data
 public class Coord {
 
     @JsonProperty("lon")
-    private float lon;
+    private String lon;
 
     @JsonProperty("lat")
-    private float lat;
+    private String lat;
 }
