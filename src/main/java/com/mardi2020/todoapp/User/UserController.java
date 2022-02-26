@@ -1,7 +1,6 @@
 package com.mardi2020.todoapp.User;
 
-import com.mardi2020.todoapp.geoLocation.GeoLocationService;
-import com.mardi2020.todoapp.geoLocation.GeoResults;
+
 import com.mardi2020.todoapp.weather.WeatherDTO;
 import com.mardi2020.todoapp.weather.WeatherService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -21,8 +21,9 @@ public class UserController {
     private final WeatherService weatherService;
 
     @GetMapping("/")
-    public String index(Model model) {
-        WeatherDTO weather = weatherService.filteringInfo();
+    public String index(Model model, HttpServletRequest request) {
+        String ip = userService.getIp2(request);
+        WeatherDTO weather = weatherService.filteringInfo(ip);
         model.addAttribute("weather", weather);
         return "index";
     }
@@ -55,4 +56,6 @@ public class UserController {
         userService.findPassword(loginId);
         return "redirect:/user/login";
     }
+
+
 }

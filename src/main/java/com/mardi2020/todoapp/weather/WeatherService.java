@@ -63,12 +63,12 @@ public class WeatherService {
         return stringBuilder.toString();
     }
 
-    public WeatherDTO filteringInfo() {
+    public WeatherDTO filteringInfo(String ip) {
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         WeatherDTO weather = new WeatherDTO();
         try {
-            GeoResults geoResults = geoLocationService.fiteringInfo("");
+            GeoResults geoResults = geoLocationService.fiteringInfo(ip);
             String lat = geoResults.getGeoLoaction().getLat();
             String lon = geoResults.getGeoLoaction().getLon();
             String results = getWeather(lat, lon);

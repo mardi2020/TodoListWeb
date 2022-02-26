@@ -11,8 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,36 @@ public class UserService implements UserDetailsService {
         sqlSession.insert("UserJoin", user);
     }
 
+    String getIp2(HttpServletRequest request) {
+
+        String ip = request.getHeader("X-Forwarded-For");
+        Logger logger = Logger.getLogger(UserService.class.getName());
+        logger.info("> X-FORWARDED-FOR : " + ip);
+
+        if (ip == null) {
+            ip = request.getHeader("Proxy-Client-IP");
+            logger.info("> Proxy-Client-IP : " + ip);
+        }
+        if (ip == null) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+            logger.info(">  WL-Proxy-Client-IP : " + ip);
+        }
+        if (ip == null) {
+            ip = request.getHeader("HTTP_CLIENT_IP");
+            logger.info("> HTTP_CLIENT_IP : " + ip);
+        }
+        if (ip == null) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+            logger.info("> HTTP_X_FORWARDED_FOR : " + ip);
+        }
+        if (ip == null) {
+            ip = request.getRemoteAddr();
+            logger.info("> getRemoteAddr : "+ip);
+        }
+        logger.info("> Result : IP Address : "+ip);
+
+        return ip;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
