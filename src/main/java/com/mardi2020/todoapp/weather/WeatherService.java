@@ -47,7 +47,7 @@ public class WeatherService {
                 bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream()));
             }
 
-            String line = "";
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
@@ -63,14 +63,14 @@ public class WeatherService {
         return stringBuilder.toString();
     }
 
-    public WeatherDTO filteringInfo(String ip) {
+    public WeatherDTO filteringInfo(String latitude, String longitude) {
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         WeatherDTO weather = new WeatherDTO();
         try {
-            GeoResults geoResults = geoLocationService.fiteringInfo(ip);
-            String lat = geoResults.getGeoLoaction().getLat();
-            String lon = geoResults.getGeoLoaction().getLon();
+
+            String lat = latitude;
+            String lon = longitude;
             String results = getWeather(lat, lon);
 
             weather = mapper.readValue(results, WeatherDTO.class);

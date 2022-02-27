@@ -210,13 +210,29 @@
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Memo</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">코로나 정보</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="text-center">
                                     </div>
-                                    <p>Example</p>
-                                    <a target="_blank" rel="nofollow" href="https://naver.com">바로 가기 &rarr;</a>
+                                    <div class="row">
+                                        &nbsp;&nbsp;&nbsp;현재 지역:&nbsp;<p th:text="${covid['gubun']}"></p>
+                                    </div>
+                                    <div class="row">
+                                        &nbsp;&nbsp;&nbsp;전일 대비:&nbsp;<p th:text="${covid['incDec']}"></p>
+                                        </div>
+                                    <div class="row">
+                                        &nbsp;&nbsp;&nbsp;사망자&nbsp;수:&nbsp;<p th:text="${covid['deathCnt']}"></p>
+                                        &nbsp;&nbsp;&nbsp;확진자&nbsp;수(누적):&nbsp;<p th:text="${covid['defCnt']}"></p>
+                                        </div>
+                                    <div class="row">
+                                        &nbsp;&nbsp;&nbsp;지역 발생:&nbsp;<p th:text="${covid['localOccCnt']}"></p>
+                                        &nbsp;&nbsp;&nbsp;해외 유입:&nbsp;<p th:text="${covid['overFlowCnt']}"></p>
+                                        </div>
+                                    <div class="row">
+                                        &nbsp;&nbsp;&nbsp;기준 일자:&nbsp;<p th:text="${covid['stdDay']}"></p>
+                                    </div>
+                                    <a target="_blank" rel="nofollow" href="https://corona-live.com/">바로 가기 &rarr;</a>
                                 </div>
                             </div>
 
