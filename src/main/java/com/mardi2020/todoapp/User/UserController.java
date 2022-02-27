@@ -1,6 +1,7 @@
 package com.mardi2020.todoapp.User;
 
 
+import com.mardi2020.todoapp.Todo.TodoService;
 import com.mardi2020.todoapp.covid19.Covid19DTO;
 import com.mardi2020.todoapp.covid19.VirusInfoService;
 import com.mardi2020.todoapp.geoLocation.GeoLocationService;
@@ -31,12 +32,26 @@ public class UserController {
 
     private final GeoLocationService geoLocationService;
 
+    private final TodoService todoService;
+
     @GetMapping("/")
     public String index(Model model, HttpServletRequest request) throws IOException, NoSuchAlgorithmException, InvalidKeyException {
         String ip = userService.getIp2(request);
         GeoResults geoResults = geoLocationService.fiteringInfo(ip);
+
         WeatherDTO weather = weatherService.filteringInfo(geoResults.getGeoLoaction().getLat(), geoResults.getGeoLoaction().getLon());
         Covid19DTO covid19 = virusInfoService.filteringInfo(geoResults.getGeoLoaction().getR1());
+
+        double total = todoService.getTotalCompletedNumber();
+        double completed = todoService.getTotalCompletedTodo();
+        long notCompleted = todoService.getTotalNotCompletedTodo();
+
+        double completedRate = (completed / total) * 100;
+        completedRate = Math.round(completedRate);
+        System.out.println("completedRate = " + completedRate);
+        model.addAttribute("total", total);
+        model.addAttribute("completedRate", completedRate);
+        model.addAttribute("notCompleted", notCompleted);
         model.addAttribute("covid", covid19);
         model.addAttribute("weather", weather);
         return "index";

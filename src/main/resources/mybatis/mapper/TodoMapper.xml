@@ -18,7 +18,7 @@
     </delete>
 
     <update id="updateTodo" parameterType="EditTodoDTO">
-        UPDATE todo SET title=#{title}, memo=#{memo} WHERE id=#{id}
+        UPDATE todo SET title=#{title}, memo=#{memo}, completed=#{completed} WHERE id=#{id}
     </update>
 
     <!-- 날짜 별로 가져오기 -->
@@ -33,5 +33,21 @@
 
     <select id="findUserPKByLoginId" resultType="long">
         SELECT id FROM User WHERE loginId=#{loginId}
+    </select>
+
+    <select id="getTotalCompletedTodo" resultType="long">
+        SELECT count(completed) as completed FROM todo WHERE completed = 1
+    </select>
+    
+    <select id="getTotalNotCompletedTodo" resultType="long">
+        SELECT count(completed) as completed FROM todo WHERE completed = 0
+    </select>
+
+    <select id="getTotalCompletedNumber" resultType="long">
+        SELECT count(completed) as completed FROM todo
+    </select>
+
+    <select id="getTodoByKey" resultType="TodoDTO">
+        SELECT * FROM todo WHERE id=#{id}
     </select>
 </mapper>

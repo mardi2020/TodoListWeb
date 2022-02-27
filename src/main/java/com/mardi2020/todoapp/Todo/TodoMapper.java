@@ -25,4 +25,12 @@ public interface TodoMapper {
     List<TodoDTO> getTodoAllByDate(String date, long userId);
 
     long findUserPKByLoginId(String loginId);
+
+    long getTotalCompletedTodo();
+
+    long getTotalNotCompletedTodo();
+
+    long getTotalCompletedNumber();
+
+    TodoDTO getTodoByKey();
 }

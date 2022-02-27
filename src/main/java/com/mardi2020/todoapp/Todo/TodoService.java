@@ -43,4 +43,20 @@ public class TodoService {
     public long loadUserPK(String loginId) {
         return sqlSession.selectOne("findUserPKByLoginId", loginId);
     }
+
+    public long getTotalCompletedTodo(){
+        return sqlSession.selectOne("getTotalCompletedTodo");
+    }
+
+    public long getTotalNotCompletedTodo() {
+        return sqlSession.selectOne("getTotalNotCompletedTodo");
+    }
+
+    public long getTotalCompletedNumber() {
+        return sqlSession.selectOne("getTotalCompletedNumber");
+    }
+
+    public TodoDTO getTodoByKey(long id) {
+        return sqlSession.selectOne("getTodoByKey", id);
+    }
 }

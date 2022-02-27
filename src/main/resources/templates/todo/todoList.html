@@ -52,8 +52,6 @@
             </a>
         </li>
 
-
-
         <!-- Divider -->
         <hr sec:authorize="isAuthenticated()" class="sidebar-divider d-none d-md-block">
 
@@ -112,6 +110,7 @@
                 </ul>
 
             </nav>
+        </div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -131,12 +130,17 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
+                                    <th>완료</th>
                                     <th>title</th>
                                     <th>memo</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="todo : ${todos}">
+                                    <td th:if="${todo.completed}">
+                                        완료!
+                                    </td>
+                                    <td th:unless="${todo.completed}"></td>
                                     <td th:text="${todo.title}"></td>
                                     <td th:text="${todo.memo}"></td>
                                 </tr>

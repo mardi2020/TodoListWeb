@@ -11,4 +11,5 @@ public class EditTodoDTO {
 
     private String memo;
 
+    private boolean completed;
 }

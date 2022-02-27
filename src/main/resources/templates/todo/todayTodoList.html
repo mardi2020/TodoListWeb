@@ -137,6 +137,7 @@
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
+                  <th>완료</th>
                   <th>title</th>
                   <th>memo</th>
                   <th>삭제</th>
@@ -145,6 +146,10 @@
                 </thead>
                 <tbody>
                 <tr th:each="todo : ${todos}">
+                  <td th:if="${todo.completed}">
+                    완료!
+                  </td>
+                  <td th:unless="${todo.completed}"></td>
                   <td th:text="${todo.title}"></td>
                   <td th:text="${todo.memo}"></td>
                   <td>

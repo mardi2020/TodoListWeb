@@ -20,4 +20,5 @@ public class TodoDTO {
 
     private long userId;
 
+    private boolean completed;
 }
