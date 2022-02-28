@@ -216,9 +216,15 @@
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">코로나 정보</h6>
                                 </div>
-                                <div class="card-body">
-                                    <div class="text-center">
+                                <div class="card-body" th:if="${covid.equals('집계중')}">
+                                    <div class="text-center"> </div>
+                                    <div class="row">
+                                        &nbsp;&nbsp;&nbsp;집계중입니다.
                                     </div>
+                                </div>
+                                <div class="card-body" th:unless="${covid.equals('집계중')}">
+                                    <div class="text-center"></div>
+
                                     <div class="row">
                                         &nbsp;&nbsp;&nbsp;현재 지역:&nbsp;<p th:text="${covid['gubun']}"></p>
                                     </div>

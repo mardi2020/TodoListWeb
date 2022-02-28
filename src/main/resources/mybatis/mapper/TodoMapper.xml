@@ -36,15 +36,15 @@
     </select>
 
     <select id="getTotalCompletedTodo" resultType="long">
-        SELECT count(completed) as completed FROM todo WHERE completed = 1
+        SELECT count(completed) as completed FROM todo WHERE completed = 1 AND userId=#{id}
     </select>
     
     <select id="getTotalNotCompletedTodo" resultType="long">
-        SELECT count(completed) as completed FROM todo WHERE completed = 0
+        SELECT count(completed) as completed FROM todo WHERE completed = 0 AND userId=#{id}
     </select>
 
     <select id="getTotalCompletedNumber" resultType="long">
-        SELECT count(completed) as completed FROM todo
+        SELECT count(completed) as completed FROM todo WHERE userId=#{id}
     </select>
 
     <select id="getTodoByKey" resultType="TodoDTO">

@@ -110,7 +110,6 @@
                 </ul>
 
             </nav>
-        </div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -127,6 +126,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
+
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
@@ -135,24 +135,26 @@
                                     <th>memo</th>
                                 </tr>
                                 </thead>
+
                                 <tbody>
                                 <tr th:each="todo : ${todos}">
-                                    <td th:if="${todo.completed}">
-                                        완료!
-                                    </td>
-                                    <td th:unless="${todo.completed}"></td>
+                                    <td th:if="${todo.completed}">완료!</td><td th:unless="${todo.completed}"></td>
                                     <td th:text="${todo.title}"></td>
                                     <td th:text="${todo.memo}"></td>
                                 </tr>
                                 </tbody>
+
                             </table>
+
                         </div>
                     </div>
+
                 </div>
 
             </div>
             <!-- End of Main Content -->
 
+        </div>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">

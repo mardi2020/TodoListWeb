@@ -18,4 +18,6 @@ public class Covid19DTO {
     private String overFlowCnt; // 해외유입 수
 
     private String stdDay; // 기준일시
+
+    private boolean error = false;
 }

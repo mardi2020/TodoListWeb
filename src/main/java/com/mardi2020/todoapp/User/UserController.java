@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
 
 
 @Controller
@@ -35,24 +36,37 @@ public class UserController {
     private final TodoService todoService;
 
     @GetMapping("/")
-    public String index(Model model, HttpServletRequest request) throws IOException, NoSuchAlgorithmException, InvalidKeyException {
+    public String index(Model model, HttpServletRequest request, Principal principal) throws IOException, NoSuchAlgorithmException, InvalidKeyException {
         String ip = userService.getIp2(request);
         GeoResults geoResults = geoLocationService.fiteringInfo(ip);
 
         WeatherDTO weather = weatherService.filteringInfo(geoResults.getGeoLoaction().getLat(), geoResults.getGeoLoaction().getLon());
         Covid19DTO covid19 = virusInfoService.filteringInfo(geoResults.getGeoLoaction().getR1());
+        if (covid19.isError()) {
+            model.addAttribute("covid", "집계중");
+        }
+        else {
+            model.addAttribute("covid", covid19);
+        }
+        if(principal != null) {
+            long id = todoService.loadUserPK(principal.getName());
+            System.out.println("id = " + id);
+            double total = todoService.getTotalCompletedNumber(id);
+            System.out.println("total = " + total);
+            double completed = todoService.getTotalCompletedTodo(id);
+            System.out.println("completed = " + completed);
+            long notCompleted = todoService.getTotalNotCompletedTodo(id);
+            System.out.println("notCompleted = " + notCompleted);
 
-        double total = todoService.getTotalCompletedNumber();
-        double completed = todoService.getTotalCompletedTodo();
-        long notCompleted = todoService.getTotalNotCompletedTodo();
+            double completedRate = (completed / total) * 100;
+            completedRate = Math.round(completedRate);
+            System.out.println("completedRate = " + completedRate);
 
-        double completedRate = (completed / total) * 100;
-        completedRate = Math.round(completedRate);
-        System.out.println("completedRate = " + completedRate);
-        model.addAttribute("total", total);
-        model.addAttribute("completedRate", completedRate);
-        model.addAttribute("notCompleted", notCompleted);
-        model.addAttribute("covid", covid19);
+            model.addAttribute("total", total);
+            model.addAttribute("completedRate", completedRate);
+            model.addAttribute("notCompleted", notCompleted);
+        }
+
         model.addAttribute("weather", weather);
         return "index";
     }

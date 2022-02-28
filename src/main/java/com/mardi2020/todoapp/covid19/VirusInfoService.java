@@ -57,7 +57,6 @@ public class VirusInfoService {
         } catch(Exception e){
             e.printStackTrace();
         }
-
         return sb.toString();
     }
 
@@ -91,21 +90,9 @@ public class VirusInfoService {
         Response response = xml2Object();
         Covid19DTO covid19DTO = new Covid19DTO();
 
-        for (Response.Body.Items.Item item : response.getBody().getItems().getItem()) {
-            if(distirct.contains(item.getGubun())) {
-                covid19DTO.setDeathCnt(item.getDeathCnt());
-                covid19DTO.setGubun(item.getGubun());
-                covid19DTO.setDefCnt(item.getDefCnt());
-                covid19DTO.setIncDec(item.getIncDec());
-                covid19DTO.setLocalOccCnt(item.getLocalOccCnt());
-                covid19DTO.setOverFlowCnt(item.getOverFlowCnt());
-                covid19DTO.setStdDay(item.getStdDay());
-                break;
-            }
-        }
-        if (covid19DTO.getGubun() == null) {
+        if(response.getBody().getItems().getItem() != null) {
             for (Response.Body.Items.Item item : response.getBody().getItems().getItem()) {
-                if(item.getGubun().equals("서울")) {
+                if (distirct.contains(item.getGubun())) {
                     covid19DTO.setDeathCnt(item.getDeathCnt());
                     covid19DTO.setGubun(item.getGubun());
                     covid19DTO.setDefCnt(item.getDefCnt());
@@ -117,6 +104,24 @@ public class VirusInfoService {
                 }
             }
         }
+        if (response.getBody().getItems().getItem() != null && covid19DTO.getGubun() == null) {
+            for (Response.Body.Items.Item item : response.getBody().getItems().getItem()) {
+                if(item != null && item.getGubun().equals("서울")) {
+                    covid19DTO.setDeathCnt(item.getDeathCnt());
+                    covid19DTO.setGubun(item.getGubun());
+                    covid19DTO.setDefCnt(item.getDefCnt());
+                    covid19DTO.setIncDec(item.getIncDec());
+                    covid19DTO.setLocalOccCnt(item.getLocalOccCnt());
+                    covid19DTO.setOverFlowCnt(item.getOverFlowCnt());
+                    covid19DTO.setStdDay(item.getStdDay());
+                    break;
+                }
+            }
+        }
+        if (covid19DTO.getGubun() == null) {
+            covid19DTO.setError(true);
+        }
+        System.out.println("covid19DTO = " + covid19DTO);
         return covid19DTO;
     }
 }

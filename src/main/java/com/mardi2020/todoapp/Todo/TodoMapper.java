@@ -26,11 +26,11 @@ public interface TodoMapper {
 
     long findUserPKByLoginId(String loginId);
 
-    long getTotalCompletedTodo();
+    long getTotalCompletedTodo(long id);
 
-    long getTotalNotCompletedTodo();
+    long getTotalNotCompletedTodo(long id);
 
-    long getTotalCompletedNumber();
+    long getTotalCompletedNumber(long id);
 
     TodoDTO getTodoByKey();
 }
